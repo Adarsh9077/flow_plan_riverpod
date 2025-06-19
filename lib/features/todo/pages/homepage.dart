@@ -1,3 +1,6 @@
+import 'package:flow_plan/common/widgets/app_style.dart';
+import 'package:flow_plan/common/widgets/height_spacer.dart';
+import 'package:flow_plan/common/widgets/reusable_text.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,7 +15,19 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("Flow Plan with RiverPod", style: TextStyle(fontSize: 30)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ReusableText(
+              text: "Flow Plan with RiverPods",
+              style: appStyle(28, Colors.redAccent, FontWeight.bold),
+            ),HeightSpacer(height: 30),
+            ReusableText(
+              text: "Flow Plan with RiverPods",
+              style: appStyle(28, Colors.redAccent, FontWeight.bold),
+            ),
+          ],
+        ),
       ),
     );
   }
