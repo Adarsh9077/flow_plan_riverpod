@@ -1,3 +1,5 @@
+import 'package:flow_plan/common/utils/constants.dart';
+import 'package:flow_plan/features/onboarding/pages/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -22,9 +24,11 @@ class MyApp extends StatelessWidget {
           title: 'Flow plan',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
+            scaffoldBackgroundColor: AppConst.kBKDark,
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           ),
-          home: const HomePage(),
+          themeMode: ThemeMode.dark,
+          home: const Onboarding(),
         );
       },
     );
