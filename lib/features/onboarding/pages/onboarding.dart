@@ -1,9 +1,13 @@
 import 'package:flow_plan/common/utils/constants.dart';
+import 'package:flow_plan/common/widgets/app_style.dart';
+import 'package:flow_plan/common/widgets/reusable_text.dart';
+import 'package:flow_plan/common/widgets/width_spacer.dart';
 import 'package:flow_plan/features/onboarding/widgets/page_one.dart';
 import 'package:flow_plan/features/onboarding/widgets/page_two.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
@@ -39,11 +43,43 @@ class _OnboardingState extends State<Onboarding> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
-                    onTap: null,
-                    child: Icon(
-                      Ionicons.chevron_forward_circle,
-                      size: 30,
-                      color: AppConst.kLight,
+                    onTap: () {
+                      pageController.nextPage(
+                        duration: Duration(milliseconds: 600),
+                        curve: Curves.ease,
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Icon(
+                          Ionicons.chevron_forward_circle,
+                          size: 30,
+                          color: AppConst.kLight,
+                        ),
+                        WidthSpacer(width: 5),
+                        ReusableText(
+                          text: "Skip",
+                          style: appStyle(16, AppConst.kLight, FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      pageController.nextPage(
+                        duration: Duration(milliseconds: 600),
+                        curve: Curves.ease,
+                      );
+                    },
+                    child: SmoothPageIndicator(
+                      controller: pageController,
+                      count: 2,
+                      effect: WormEffect(
+                        dotHeight: 12,
+                        dotWidth: 16,
+                        spacing: 10,
+                        dotColor: AppConst.kYellow,
+                      ),
                     ),
                   ),
                 ],

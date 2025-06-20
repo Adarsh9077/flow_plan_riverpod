@@ -10,6 +10,11 @@ class PageOne extends StatelessWidget {
       height: AppConst.kHeight,
       width: AppConst.kWidth,
       color: AppConst.kBKLight,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [Padding(padding: EdgeInsets.symmetric(horizontal: 30))],
+      ),
     );
   }
 }
