@@ -1,8 +1,11 @@
 import 'package:flow_plan/common/widgets/app_style.dart';
+import 'package:flow_plan/common/widgets/custom_text.dart';
 import 'package:flow_plan/common/widgets/height_spacer.dart';
 import 'package:flow_plan/common/widgets/reusable_text.dart';
+import 'package:flow_plan/common/widgets/width_spacer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../common/utils/constants.dart';
@@ -16,6 +19,8 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
+  final TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,26 +56,50 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ],
                 ),
               ),
+              HeightSpacer(height: 20.w),
+              CustomTextField(
+                controller: searchController,
+                hintText: "Search",
+                prefixIcon: Container(
+                  padding: EdgeInsets.all(14.h),
+                  child: GestureDetector(
+                    onTap: null,
+                    child: Icon(AntDesign.search1, color: AppConst.kGreyLight),
+                  ),
+                ),
+                suffixIcon: Icon(
+                  FontAwesome.sliders,
+                  color: AppConst.kGreyLight,
+                ),
+              ),
+              HeightSpacer(height: 15.h),
             ],
           ),
         ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ReusableText(
-              text: "Flow Plan with RiverPods",
-              style: appStyle(28, Colors.redAccent, FontWeight.bold),
-            ),
-            HeightSpacer(height: 30),
-            ReusableText(
-              text: "Flow Plan with RiverPods",
-              style: appStyle(28, Colors.redAccent, FontWeight.bold),
-            ),
-          ],
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: ListView(
+            children: [
+              HeightSpacer(height: 25.h),
+              Row(
+                children: [
+                  Icon(FontAwesome.tasks, size: 20, color: AppConst.kLight),
+                  WidthSpacer(width: 10),
+                  ReusableText(
+                    text: "Today's Task",
+                    style: appStyle(18, AppConst.kLight, FontWeight.bold),
+                  ),
+                ],
+              ),
+              HeightSpacer(height: 25.h)
+              ,Container()
+            ],
+          ),
         ),
       ),
     );
   }
 }
+// 3:00:00
