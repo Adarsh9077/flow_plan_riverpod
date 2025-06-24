@@ -121,6 +121,7 @@ class _HomePageState extends ConsumerState<HomePage>
                     FontWeight.w700,
                   ),
                   controller: tabController,
+                  unselectedLabelColor: AppConst.kLight,
                   tabs: [
                     Tab(
                       child: SizedBox(
@@ -156,6 +157,27 @@ class _HomePageState extends ConsumerState<HomePage>
                   ],
                 ),
               ),
+              HeightSpacer(height: 20),
+              SizedBox(
+                height: AppConst.kHeight * 0.3,
+                width: AppConst.kWidth,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(AppConst.kRadius),
+                  child: TabBarView(
+                    controller: tabController,
+                    children: [
+                      Container(
+                        color: AppConst.kBKLight,
+                        height: AppConst.kHeight * 0.3,
+                      ),
+                      Container(
+                        color: AppConst.kGreyLight,
+                        height: AppConst.kHeight * 0.3,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -164,4 +186,4 @@ class _HomePageState extends ConsumerState<HomePage>
   }
 }
 
-// 3:09:30
+// 3:32:20
