@@ -18,7 +18,12 @@ class HomePage extends ConsumerStatefulWidget {
   ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage> {
+class _HomePageState extends ConsumerState<HomePage>
+    with TickerProviderStateMixin {
+  late final TabController tabController = TabController(
+    length: 2,
+    vsync: this,
+  );
   final TextEditingController searchController = TextEditingController();
 
   @override
@@ -93,8 +98,64 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ),
                 ],
               ),
-              HeightSpacer(height: 25.h)
-              ,Container()
+              HeightSpacer(height: 25.h),
+              Container(
+                decoration: BoxDecoration(
+                  color: AppConst.kLight,
+                  borderRadius: BorderRadius.circular(AppConst.kRadius),
+                ),
+                child: TabBar(
+                  indicatorSize: TabBarIndicatorSize.label,
+                  indicator: BoxDecoration(
+                    color: AppConst.kGreyLight,
+                    borderRadius: BorderRadius.circular(
+                      AppConst.kRadius * 0.75,
+                    ),
+                  ),
+                  labelPadding: EdgeInsets.zero,
+                  isScrollable: false,
+                  labelColor: AppConst.kBlueLight,
+                  labelStyle: appStyle(
+                    24,
+                    AppConst.kBlueLight,
+                    FontWeight.w700,
+                  ),
+                  controller: tabController,
+                  tabs: [
+                    Tab(
+                      child: SizedBox(
+                        width: AppConst.kWidth * 0.5,
+                        child: Center(
+                          child: ReusableText(
+                            text: "Pending",
+                            style: appStyle(
+                              16,
+                              AppConst.kBKDark,
+                              FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Tab(
+                      child: Container(
+                        padding: EdgeInsets.only(left: 10),
+                        width: AppConst.kWidth * 0.5,
+                        child: Center(
+                          child: ReusableText(
+                            text: "Completed",
+                            style: appStyle(
+                              16,
+                              AppConst.kBKDark,
+                              FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -102,4 +163,5 @@ class _HomePageState extends ConsumerState<HomePage> {
     );
   }
 }
-// 3:00:00
+
+// 3:09:30
