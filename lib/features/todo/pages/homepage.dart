@@ -1,5 +1,6 @@
 import 'package:flow_plan/common/widgets/app_style.dart';
 import 'package:flow_plan/common/widgets/custom_text.dart';
+import 'package:flow_plan/common/widgets/expansion_tile_custom.dart';
 import 'package:flow_plan/common/widgets/height_spacer.dart';
 import 'package:flow_plan/common/widgets/reusable_text.dart';
 import 'package:flow_plan/common/widgets/width_spacer.dart';
@@ -178,10 +179,22 @@ class _HomePageState extends ConsumerState<HomePage>
                   ),
                 ),
               ),
+              HeightSpacer(height: 20),
+              ExpansionTileCustom(
+                title: "Tomorrow's Task",
+                subTitle: "Tomorrow's Task are shawn here",
+                children: [],
+              ),
+              HeightSpacer(height: 20),
+              ExpansionTileCustom(
+                title: DateTime.now().add(Duration(days: 2)).toString().substring(5,10),
+                subTitle: "Day after tomorrow tasks",
+                children: [],
+              ),
             ],
           ),
         ),
       ),
     );
   }
-} // 3:46:00
+} // 3:52:30
