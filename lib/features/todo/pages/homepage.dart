@@ -4,6 +4,7 @@ import 'package:flow_plan/common/widgets/expansion_tile_custom.dart';
 import 'package:flow_plan/common/widgets/height_spacer.dart';
 import 'package:flow_plan/common/widgets/reusable_text.dart';
 import 'package:flow_plan/common/widgets/width_spacer.dart';
+import 'package:flow_plan/features/todo/widgets/todo_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -170,6 +171,9 @@ class _HomePageState extends ConsumerState<HomePage>
                       Container(
                         color: AppConst.kBKLight,
                         height: AppConst.kHeight * 0.3,
+                        child: ListView(
+                          children: [TodoTile(start: "03:00", end: "5:00")],
+                        ),
                       ),
                       Container(
                         color: AppConst.kGreyLight,
@@ -187,7 +191,19 @@ class _HomePageState extends ConsumerState<HomePage>
               ),
               HeightSpacer(height: 20),
               ExpansionTileCustom(
-                title: DateTime.now().add(Duration(days: 2)).toString().substring(5,10),
+                title: DateTime.now()
+                    .add(Duration(days: 2))
+                    .toString()
+                    .substring(5, 10),
+                subTitle: "Day after tomorrow tasks",
+                children: [],
+              ),
+              HeightSpacer(height: 20),
+              ExpansionTileCustom(
+                title: DateTime.now()
+                    .add(Duration(days: 3))
+                    .toString()
+                    .substring(5, 10),
                 subTitle: "Day after tomorrow tasks",
                 children: [],
               ),
@@ -197,4 +213,4 @@ class _HomePageState extends ConsumerState<HomePage>
       ),
     );
   }
-} // 3:52:30
+} // 4:16:00
