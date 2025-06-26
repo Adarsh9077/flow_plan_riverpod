@@ -172,7 +172,16 @@ class _HomePageState extends ConsumerState<HomePage>
                         color: AppConst.kBKLight,
                         height: AppConst.kHeight * 0.3,
                         child: ListView(
-                          children: [TodoTile(start: "03:00", end: "5:00")],
+                          children: [
+                            TodoTile(
+                              start: "03:00",
+                              end: "5:00",
+                              switcher: Switch(
+                                value: true,
+                                onChanged: (value) {},
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       Container(
@@ -213,4 +222,4 @@ class _HomePageState extends ConsumerState<HomePage>
       ),
     );
   }
-} // 4:16:00
+} // 4:21:30

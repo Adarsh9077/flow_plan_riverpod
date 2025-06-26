@@ -17,6 +17,7 @@ class TodoTile extends StatelessWidget {
     this.end,
     this.editWidget,
     this.delete,
+    this.switcher,
   });
 
   final String? title;
@@ -25,6 +26,7 @@ class TodoTile extends StatelessWidget {
   final String? start;
   final String? end;
   final Widget? editWidget;
+  final Widget? switcher;
   final void Function()? delete;
 
   @override
@@ -54,7 +56,7 @@ class TodoTile extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.all(8.h),
                       child: SizedBox(
-                        width: AppConst.kWidth * 0.7,
+                        width: AppConst.kWidth * 0.6,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -124,7 +126,7 @@ class TodoTile extends StatelessWidget {
                     ),
                   ],
                 ),
-              Container(),
+                Container(padding: EdgeInsets.only(bottom: 0),child: switcher,),
               ],
             ),
           ),
