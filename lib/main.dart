@@ -1,10 +1,11 @@
 import 'package:flow_plan/common/utils/constants.dart';
-import 'package:flow_plan/features/onboarding/pages/onboarding.dart';
+import 'package:flow_plan/features/auth/pages/test_page.dart';
+/// @ import 'package:flow_plan/features/onboarding/pages/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'features/todo/pages/homepage.dart';
+/// !import 'features/todo/pages/homepage.dart';
 
 void main() {
   runApp(ProviderScope(child: MyApp()));
@@ -28,10 +29,9 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           ),
           themeMode: ThemeMode.dark,
-          home: const Onboarding(),
+          home: TestPage(),
         );
       },
     );
   }
 }
-// 26:00

@@ -178,7 +178,11 @@ class _HomePageState extends ConsumerState<HomePage>
                               end: "5:00",
                               switcher: Switch(
                                 value: true,
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  setState(() {
+                                    value = !value;
+                                  });
+                                },
                               ),
                             ),
                           ],
