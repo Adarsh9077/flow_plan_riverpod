@@ -4,6 +4,7 @@ import 'package:flow_plan/common/widgets/expansion_tile_custom.dart';
 import 'package:flow_plan/common/widgets/height_spacer.dart';
 import 'package:flow_plan/common/widgets/reusable_text.dart';
 import 'package:flow_plan/common/widgets/width_spacer.dart';
+import 'package:flow_plan/features/todo/controllers/expansion_provider.dart';
 import 'package:flow_plan/features/todo/widgets/todo_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -200,6 +201,15 @@ class _HomePageState extends ConsumerState<HomePage>
               ExpansionTileCustom(
                 title: "Tomorrow's Task",
                 subTitle: "Tomorrow's Task are shawn here",
+                onExpansionChanged: (bool expanded) {
+                  ref.read(expansionStateProvider.notifier).setStart(!expanded);
+                },
+                trailing: Padding(
+                  padding: const EdgeInsets.only(right: 12.0),
+                  child: ref.watch(expansionStateProvider)
+                      ? Icon(AntDesign.closecircleo, color: AppConst.kLight)
+                      : Icon(AntDesign.circledown,color: AppConst.kBlueLight,),
+                ),
                 children: [],
               ),
               HeightSpacer(height: 20),
@@ -226,4 +236,4 @@ class _HomePageState extends ConsumerState<HomePage>
       ),
     );
   }
-} // 4:21:30
+} // 05:15:55
