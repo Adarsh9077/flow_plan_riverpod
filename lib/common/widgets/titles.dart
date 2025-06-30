@@ -31,9 +31,10 @@ class BottomTitles extends StatelessWidget {
               builder: (context, ref, child) {
                 return Container(
                   height: 80,
-                  width: 8,
+                  width: 5,
                   decoration: BoxDecoration(
                     //  TODO: ADD DYNAMIC COLORS
+                    // color: clr,
                     color: clr,
                     borderRadius: BorderRadius.circular(AppConst.kRadius),
                   ),

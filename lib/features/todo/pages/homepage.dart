@@ -208,10 +208,24 @@ class _HomePageState extends ConsumerState<HomePage>
                   padding: const EdgeInsets.only(right: 12.0),
                   child: ref.watch(expansionStateProvider)
                       ? Icon(AntDesign.circledown, color: AppConst.kLight)
-                      : Icon(AntDesign.closecircleo, color: AppConst.kBlueLight),
+                      : Icon(
+                          AntDesign.closecircleo,
+                          color: AppConst.kBlueLight,
+                        ),
                 ),
                 children: [
-                  TodoTile(start: "4:00")
+                  TodoTile(
+                    start: "11:00",
+                    end: "04:00",
+                    switcher: Switch(
+                      value: true,
+                      onChanged: (value) {
+                        setState(() {
+                          value = !value;
+                        });
+                      },
+                    ),
+                  ),
                 ],
               ),
               HeightSpacer(height: 20),
@@ -221,7 +235,34 @@ class _HomePageState extends ConsumerState<HomePage>
                     .toString()
                     .substring(5, 10),
                 subTitle: "Day after tomorrow tasks",
-                children: [],
+                onExpansionChanged: (bool expanded) {
+                  ref
+                      .read(expansionState0Provider.notifier)
+                      .setStart(!expanded);
+                },
+                trailing: Padding(
+                  padding: EdgeInsets.only(right: 8),
+                  child: ref.watch(expansionState0Provider)
+                      ? Icon(AntDesign.circledown, color: AppConst.kLight)
+                      : Icon(
+                          AntDesign.closecircleo,
+                          color: AppConst.kBlueLight,
+                        ),
+                ),
+                children: [
+                  TodoTile(
+                    start: "08:00",
+                    end: "10:00",
+                    switcher: Switch(
+                      value: true,
+                      onChanged: (value) {
+                        setState(() {
+                          value = !value;
+                        });
+                      },
+                    ),
+                  ),
+                ],
               ),
               HeightSpacer(height: 20),
               ExpansionTileCustom(
@@ -229,8 +270,33 @@ class _HomePageState extends ConsumerState<HomePage>
                     .add(Duration(days: 3))
                     .toString()
                     .substring(5, 10),
+                onExpansionChanged: (bool extended) {
+                  ref.read(expansionStateProvider.notifier).setStart(!extended);
+                },
                 subTitle: "Day after tomorrow tasks",
-                children: [],
+                trailing: Padding(
+                  padding: EdgeInsets.only(right: 12),
+                  child: ref.watch(expansionStateProvider)
+                      ? Icon(AntDesign.circledown, color: AppConst.kLight)
+                      : Icon(
+                          AntDesign.closecircleo,
+                          color: AppConst.kBlueLight,
+                        ),
+                ),
+                children: [
+                  TodoTile(
+                    start: "08:00",
+                    end: "10:00",
+                    switcher: Switch(
+                      value: true,
+                      onChanged: (value) {
+                        setState(() {
+                          value = !value;
+                        });
+                      },
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
