@@ -20,7 +20,7 @@ class ExpansionState0 extends _$ExpansionState0 {
   // @riverpod
   @override
   bool build(){
-    return false ;
+    return true ;
   }
 
   void setStart (bool newState){

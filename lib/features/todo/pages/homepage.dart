@@ -207,10 +207,12 @@ class _HomePageState extends ConsumerState<HomePage>
                 trailing: Padding(
                   padding: const EdgeInsets.only(right: 12.0),
                   child: ref.watch(expansionStateProvider)
-                      ? Icon(AntDesign.closecircleo, color: AppConst.kLight)
-                      : Icon(AntDesign.circledown,color: AppConst.kBlueLight,),
+                      ? Icon(AntDesign.circledown, color: AppConst.kLight)
+                      : Icon(AntDesign.closecircleo, color: AppConst.kBlueLight),
                 ),
-                children: [],
+                children: [
+                  TodoTile(start: "4:00")
+                ],
               ),
               HeightSpacer(height: 20),
               ExpansionTileCustom(
