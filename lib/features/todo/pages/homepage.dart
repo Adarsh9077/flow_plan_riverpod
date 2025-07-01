@@ -271,12 +271,12 @@ class _HomePageState extends ConsumerState<HomePage>
                     .toString()
                     .substring(5, 10),
                 onExpansionChanged: (bool extended) {
-                  ref.read(expansionStateProvider.notifier).setStart(!extended);
+                  ref.read(expansionState1Provider.notifier).setStart(!extended);
                 },
-                subTitle: "Day after tomorrow tasks",
+                subTitle: "Day after tomorrow of the next day",
                 trailing: Padding(
                   padding: EdgeInsets.only(right: 12),
-                  child: ref.watch(expansionStateProvider)
+                  child: ref.watch(expansionState1Provider)
                       ? Icon(AntDesign.circledown, color: AppConst.kLight)
                       : Icon(
                           AntDesign.closecircleo,
@@ -304,4 +304,4 @@ class _HomePageState extends ConsumerState<HomePage>
       ),
     );
   }
-} // 05:15:55
+} // 05:18:55
