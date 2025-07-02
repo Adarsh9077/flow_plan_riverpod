@@ -93,4 +93,13 @@ class DBHelper {
     );
     return results;
   }
+
+  static Future<void> deleteItem(int id) async {
+    final db = await DBHelper.db();
+    try {
+      db.delete("flowPlane", whereArgs: [id], where: "id = ?");
+    } catch (e) {
+      debugPrint("Unable to delete $e");
+    }
+  }
 } // 5:50:00

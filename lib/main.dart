@@ -1,12 +1,9 @@
 import 'package:flow_plan/common/utils/constants.dart';
-// import 'package:flow_plan/features/auth/pages/test_page.dart';
-/// @ import 'package:flow_plan/features/onboarding/pages/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'features/todo/pages/homepage.dart';
-
-/// !import 'features/todo/pages/homepage.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 
 void main() {
   runApp(ProviderScope(child: MyApp()));
@@ -15,6 +12,14 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  static final defaultLightColorScheme = ColorScheme.fromSwatch(
+    primarySwatch: Colors.blue,
+  );
+  static final defaultDarkColorScheme = ColorScheme.fromSwatch(
+    primarySwatch: Colors.blue,
+    brightness: Brightness.dark,
+  );
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -22,16 +27,24 @@ class MyApp extends StatelessWidget {
       designSize: Size(375, 825),
       minTextAdapt: true,
       builder: (context, child) {
-        return MaterialApp(
-          title: 'Flow plan',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            scaffoldBackgroundColor: AppConst.kBKDark,
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          ),
-          themeMode: ThemeMode.dark,
-          // home: TestPage(),
-          home: HomePage(),
+        return DynamicColorBuilder(
+          builder: (lightColorScheme, darkColorScheme) {
+            return MaterialApp(
+              title: 'Flow plan',
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                scaffoldBackgroundColor: AppConst.kBKDark,
+                colorScheme: lightColorScheme ?? defaultLightColorScheme,
+              ),
+              darkTheme: ThemeData(
+                colorScheme: darkColorScheme ?? defaultLightColorScheme,
+                useMaterial3: true,
+              ),
+              themeMode: ThemeMode.dark,
+              // home: TestPage(),
+              home: HomePage(),
+            );
+          },
         );
       },
     );
