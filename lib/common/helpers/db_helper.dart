@@ -56,4 +56,41 @@ class DBHelper {
     final db = await DBHelper.db();
     return db.query('user', orderBy: 'id');
   }
-} // 5:42:05
+
+  static Future<List<Map<String, dynamic>>> getItems() async {
+    final db = await DBHelper.db();
+    return db.query('flowPlans', orderBy: 'id');
+  }
+
+  static Future<List<Map<String, dynamic>>> getItem(int id) async {
+    final db = await DBHelper.db();
+    return db.query('flowPlans', where: "id = ?", whereArgs: [id], limit: 1);
+  }
+
+  static Future<int> updateItem(
+    int id,
+    String title,
+    String desc,
+    int isCompleted,
+    String date,
+    String startTime,
+    String endTime,
+  ) async {
+    final db = await DBHelper.db();
+    final data = {
+      "title": title,
+      "desc": desc,
+      "isCompleted": isCompleted,
+      "date": date,
+      "startTime": startTime,
+      "endTime": endTime,
+    };
+    final results = db.update(
+      "flowPlans",
+      data,
+      where: "id = ?",
+      whereArgs: [id],
+    );
+    return results;
+  }
+} // 5:50:00
