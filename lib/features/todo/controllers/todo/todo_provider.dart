@@ -1,5 +1,6 @@
 import 'package:flow_plan/common/helpers/db_helper.dart';
 import 'package:flow_plan/common/models/task_modal.dart';
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'todo_provider.g.dart';
@@ -74,4 +75,16 @@ class TodoState extends _$TodoState {
       repeat,
     );
   }
-} // 06:10:00
+
+  // Today
+  String getToday() {
+    DateTime today = DateTime.now();
+    return today.toString().substring(0, 10);
+  }
+
+  // Tomorrow
+  String getTomorrow() {
+    DateTime tomorrow = DateTime.now().add(Duration(days: 2));
+    return tomorrow.toString().substring(0, 10);
+  }
+} // 06:13:40
