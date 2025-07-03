@@ -13,7 +13,7 @@ class TestPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String code = ref.watch(codeStateProvider);
+    String code = ref.watch(codeState01Provider);
     return Scaffold(
       body: Center(
         child: Column(
@@ -24,7 +24,7 @@ class TestPage extends ConsumerWidget {
             ),
             TextButton(
               onPressed: () {
-                ref.read(codeStateProvider.notifier).setStart("Hellooooo....");
+                ref.read(codeState01Provider.notifier).setStart("Hellooooo....");
               },
               child: Text("Fuck Me...."),
             ),

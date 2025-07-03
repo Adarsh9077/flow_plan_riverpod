@@ -75,6 +75,8 @@ class DBHelper {
     String date,
     String startTime,
     String endTime,
+    int reminder,
+    String repeat,
   ) async {
     final db = await DBHelper.db();
     final data = {
