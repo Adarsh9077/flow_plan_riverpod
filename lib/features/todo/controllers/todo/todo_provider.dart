@@ -87,4 +87,26 @@ class TodoState extends _$TodoState {
     DateTime tomorrow = DateTime.now().add(Duration(days: 2));
     return tomorrow.toString().substring(0, 10);
   }
+
+  List<String> last30days() {
+    DateTime today = DateTime.now();
+    DateTime oneMonthAgo = today.subtract(Duration(days: 30));
+
+    List<String> dates = [];
+    for (int i = 0; i < 30; i++) {
+      DateTime date = oneMonthAgo.add(Duration(days: i));
+      dates.add(date.toString().substring(0, 10));
+    }
+    return dates;
+  }
+
+  bool getStatus(Task data) {
+    bool? isCompleted;
+    if (data.isCompleted == 0) {
+      isCompleted = false;
+    } else {
+      isCompleted = true;
+    }
+    return isCompleted;
+  }
 } // 06:13:40
