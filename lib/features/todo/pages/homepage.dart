@@ -5,6 +5,7 @@ import 'package:flow_plan/common/widgets/height_spacer.dart';
 import 'package:flow_plan/common/widgets/reusable_text.dart';
 import 'package:flow_plan/common/widgets/width_spacer.dart';
 import 'package:flow_plan/features/todo/controllers/expansion_provider.dart';
+import 'package:flow_plan/features/todo/pages/add.dart';
 import 'package:flow_plan/features/todo/widgets/todo_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -57,7 +58,12 @@ class _HomePageState extends ConsumerState<HomePage>
                         borderRadius: BorderRadius.circular(9),
                       ),
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => AddTask()),
+                          );
+                        },
                         child: Icon(Icons.add, color: AppConst.kBKDark),
                       ),
                     ),
@@ -271,7 +277,9 @@ class _HomePageState extends ConsumerState<HomePage>
                     .toString()
                     .substring(5, 10),
                 onExpansionChanged: (bool extended) {
-                  ref.read(expansionState1Provider.notifier).setStart(!extended);
+                  ref
+                      .read(expansionState1Provider.notifier)
+                      .setStart(!extended);
                 },
                 subTitle: "Day after tomorrow of the next day",
                 trailing: Padding(
