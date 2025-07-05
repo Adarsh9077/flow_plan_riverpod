@@ -3,10 +3,12 @@ import 'package:flow_plan/common/widgets/app_style.dart';
 import 'package:flow_plan/common/widgets/custom_otl_btn.dart';
 import 'package:flow_plan/common/widgets/custom_text.dart';
 import 'package:flow_plan/common/widgets/height_spacer.dart';
+import 'package:flow_plan/features/todo/controllers/dates/dates_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart' as picker;
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
+    as picker;
 
 class AddTask extends ConsumerStatefulWidget {
   AddTask({super.key});
@@ -21,6 +23,10 @@ class _AddTaskState extends ConsumerState<AddTask> {
 
   @override
   Widget build(BuildContext context) {
+    var scheduleDate = ref.watch(dateStateProvider);
+    var scheduleStartTime = ref.watch(startTimeStateProvider);
+    var scheduleFinishTime = ref.watch(finishTimeStateProvider);
+
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
       body: Padding(
@@ -44,20 +50,27 @@ class _AddTaskState extends ConsumerState<AddTask> {
               width: AppConst.kWidth,
               height: 52.h,
               color: AppConst.kLight,
-              text: "Set Date",
+              text: scheduleDate == ""
+                  ? "Set Date"
+                  : scheduleDate.substring(0, 10),
               color2: AppConst.kBlueLight,
-              onTap: (){
-                picker.DatePicker.showDatePicker(context,
-                    showTitleActions: true,
-                    theme: picker.DatePickerTheme(
-                        doneStyle:
-                        TextStyle(color: AppConst.kGreen, fontSize: 16)),
-                    onChanged: (date) {
-                      print('change $date in time zone ' +
-                          date.timeZoneOffset.inHours.toString());
-                    }, onConfirm: (date) {
-                      print('confirm $date');
-                    }, currentTime: DateTime.now(), locale: picker.LocaleType.en);
+              onTap: () {
+                picker.DatePicker.showDatePicker(
+                  context,
+                  showTitleActions: true,
+                  minTime: DateTime.now(),
+                  theme: picker.DatePickerTheme(
+                    doneStyle: TextStyle(color: AppConst.kGreen, fontSize: 16),
+                  ),
+                  onConfirm: (date) {
+                    // print('confirm $date');
+                    ref
+                        .read(dateStateProvider.notifier)
+                        .setDate(date.toString());
+                  },
+                  currentTime: DateTime.now(),
+                  locale: picker.LocaleType.en,
+                );
               },
             ),
             HeightSpacer(height: 20),
@@ -68,15 +81,47 @@ class _AddTaskState extends ConsumerState<AddTask> {
                   width: AppConst.kWidth * 0.4,
                   height: 52.h,
                   color: AppConst.kLight,
-                  text: "Start Time",
+                  text: scheduleStartTime == ""
+                      ? "Start Time"
+                      : scheduleStartTime.substring(11, 16),
                   color2: AppConst.kBlueLight,
+                  onTap: () {
+                    picker.DatePicker.showDateTimePicker(
+                      context,
+                      showTitleActions: true,
+                      onConfirm: (date) {
+                        // print('confirm $date');
+                        ref
+                            .read(startTimeStateProvider.notifier)
+                            .setStartTime(date.toString());
+                      },
+                      currentTime: DateTime.now(),
+                      locale: picker.LocaleType.en,
+                    );
+                  },
                 ),
                 CustomOutlineBtn(
                   width: AppConst.kWidth * 0.4,
                   height: 52.h,
                   color: AppConst.kLight,
-                  text: "End Time",
+                  text: scheduleFinishTime == ""
+                      ? "End Time"
+                      : scheduleFinishTime.substring(11, 16),
                   color2: AppConst.kBlueLight,
+                  onTap: () {
+                    picker.DatePicker.showDateTimePicker(
+                      context,
+                      showTitleActions: true,
+                      onConfirm: (date) {
+                        // print('confirm $date');
+                        ref
+                            .read(finishTimeStateProvider.notifier)
+                            .setFinishTime(date.toString());
+                      },
+                      currentTime: DateTime.now(),
+                      locale: picker.LocaleType.en,
+                    );
+                  },
                 ),
               ],
             ),
@@ -93,4 +138,4 @@ class _AddTaskState extends ConsumerState<AddTask> {
       ),
     );
   }
-} // 06:42:25
+} // 06:52:00
