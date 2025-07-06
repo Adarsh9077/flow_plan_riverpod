@@ -1,9 +1,11 @@
+import 'package:flow_plan/common/models/task_modal.dart';
 import 'package:flow_plan/common/utils/constants.dart';
 import 'package:flow_plan/common/widgets/app_style.dart';
 import 'package:flow_plan/common/widgets/custom_otl_btn.dart';
 import 'package:flow_plan/common/widgets/custom_text.dart';
 import 'package:flow_plan/common/widgets/height_spacer.dart';
 import 'package:flow_plan/features/todo/controllers/dates/dates_provider.dart';
+import 'package:flow_plan/features/todo/controllers/todo/todo_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -132,10 +134,35 @@ class _AddTaskState extends ConsumerState<AddTask> {
               color: AppConst.kLight,
               text: "Submit",
               color2: AppConst.kGreen,
+              onTap: () {
+                if (titleController.text.isNotEmpty &&
+                    descController.text.isNotEmpty &&
+                    scheduleDate.isNotEmpty &&
+                    scheduleStartTime.isNotEmpty &&
+                    scheduleFinishTime.isNotEmpty) {
+                  Task task = Task(
+                    title: titleController.text,
+                    desc: descController.text,
+                    isCompleted: 0,
+                    date: scheduleDate,
+                    startTime: scheduleStartTime.substring(10, 16),
+                    endTime: scheduleFinishTime.substring(10, 16),
+                    reminder: 0,
+                    repeat: "yes",
+                  );
+                  ref.read(todoStateProvider.notifier).addItem(task);
+                  ref.read(dateStateProvider.notifier).setDate("");
+                  ref.read(startTimeStateProvider.notifier).setStartTime("");
+                  ref.read(finishTimeStateProvider.notifier).setFinishTime("");
+                  Navigator.pop(context);
+                } else {
+                  print("Failed to add Task");
+                }
+              },
             ),
           ],
         ),
       ),
     );
   }
-} // 06:52:00
+} // 07:00:00
