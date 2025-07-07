@@ -13,6 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../common/helpers/db_helper.dart';
 import '../../../common/models/task_modal.dart';
 import '../../../common/utils/constants.dart';
 
@@ -30,9 +31,22 @@ class _HomePageState extends ConsumerState<HomePage>
     vsync: this,
   );
   final TextEditingController searchController = TextEditingController();
-
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   loadData();
+  // }
+  //
+  // void loadData() async {
+  //   final items = await DBHelper.getItems();
+  //   print("All FlowPlans:********");
+  //   items.forEach((item) {
+  //     print(item["id"]);
+  //   });
+  // }
   @override
   Widget build(BuildContext context) {
+    print("object00007");
     ref.watch(todoStateProvider.notifier).refresh();
     return Scaffold(
       appBar: AppBar(
@@ -180,22 +194,7 @@ class _HomePageState extends ConsumerState<HomePage>
                       Container(
                         color: AppConst.kBKLight,
                         height: AppConst.kHeight * 0.3,
-                        child: ListView(
-                          children: [
-                            TodoTile(
-                              start: "03:00",
-                              end: "5:00",
-                              switcher: Switch(
-                                value: true,
-                                onChanged: (value) {
-                                  setState(() {
-                                    value = !value;
-                                  });
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
+                        child: TodayTask(),
                       ),
                       Container(
                         color: AppConst.kGreyLight,
@@ -321,15 +320,25 @@ class TodayTask extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // ref.read(todoStateProvider.notifier).refresh();
-    List<Task> listData = ref.read(todoStateProvider);
+    // ref.watch(todoStateProvider);
+    List<Task> listData = ref.watch(todoStateProvider);
     String today = ref.read(todoStateProvider.notifier).getToday();
-    var todayData = listData.where(
-      (element) => element.isCompleted == 0 && element.date!.contains(today),
-    );
+    var todayData = listData
+        .where(
+          (element) =>
+              element.isCompleted == 0 && element.date!.contains(today),
+        )
+        .toList();
     return ListView.builder(
       itemBuilder: (context, index) {
-        return TodoTile();
+        final data = todayData[index];
+        return TodoTile(
+          title: data.title,
+          description: data.desc,
+          clr: AppConst.kGreen,
+          start: data.startTime,
+          end: data.endTime,
+        );
       },
       itemCount: todayData.length,
     );

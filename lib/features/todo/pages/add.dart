@@ -156,7 +156,7 @@ class _AddTaskState extends ConsumerState<AddTask> {
                   ref.read(finishTimeStateProvider.notifier).setFinishTime("");
                   Navigator.pop(context);
                 } else {
-                  print("Failed to add Task");
+                  print("Failed to add Task12");
                 }
               },
             ),

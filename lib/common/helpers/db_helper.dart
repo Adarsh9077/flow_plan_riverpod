@@ -9,7 +9,7 @@ class DBHelper {
       "id INTEGER PRIMARY KEY AUTOINCREMENT, "
       "title STRING,desc TEXT, date STRING, "
       "startTime STRING, endTime STRING, "
-      "remind INTEGER, repeat STRING, "
+      "reminder INTEGER, repeat STRING, "
       "isCompleted INTEGER"
       ")",
     );
