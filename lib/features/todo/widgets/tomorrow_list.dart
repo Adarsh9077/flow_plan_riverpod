@@ -15,9 +15,10 @@ class TomorrowList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final todos = ref.watch(todoStateProvider);
     String tomorrow = ref.read(todoStateProvider.notifier).getTomorrow();
-    var tomorrowList = todos.forEach(
+    var tomorrowList = todos.where(
       (element) => element.date!.contains(tomorrow),
     );
+    var color = ref.read(todoStateProvider.notifier).getRandomColor();
     return ExpansionTileCustom(
       title: "Tomorrow's Task",
       subTitle: "Tomorrow's Task are shawn here",
@@ -31,19 +32,23 @@ class TomorrowList extends ConsumerWidget {
             : Icon(AntDesign.closecircleo, color: AppConst.kBlueLight),
       ),
       children: [
-        TodoTile(
-          start: "11:00",
-          end: "04:00",
-          switcher: Switch(
-            value: true,
-            onChanged: (value) {
-              // setState(() {
-              //   value = !value;
-              // });
+        for (final todo in tomorrowList)
+          TodoTile(
+            title: todo.title,
+            description: todo.desc,
+            clr: color,
+            start: todo.startTime,
+            end: todo.endTime,
+            delete: () {
+              ref.read(todoStateProvider.notifier).deleteTodo(todo.id ?? 0);
             },
+            editWidget: GestureDetector(
+              onTap: () {},
+              child: Icon(MaterialCommunityIcons.circle_edit_outline),
+            ),
+            switcher: SizedBox.shrink(),
           ),
-        ),
       ],
     );
   }
-} // 07:32:45
+} // 07:42:00
