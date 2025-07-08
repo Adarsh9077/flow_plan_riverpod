@@ -1,3 +1,4 @@
+import 'package:flow_plan/common/helpers/db_helper.dart';
 import 'package:flow_plan/common/widgets/app_style.dart';
 import 'package:flow_plan/common/widgets/custom_text.dart';
 import 'package:flow_plan/common/widgets/expansion_tile_custom.dart';
@@ -29,6 +30,24 @@ class _HomePageState extends ConsumerState<HomePage>
     vsync: this,
   );
   final TextEditingController searchController = TextEditingController();
+
+  @override
+  // Future<List<Map<>>> db = DBHelper.db();
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadData();
+  }
+
+  void loadData() async {
+    final items = await DBHelper.getItems();
+    print("FlowPlans@@@@@@@@@@");
+    items.forEach((item) {
+      print(item);
+      print("object\n");
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -317,13 +336,14 @@ class TodayTask extends ConsumerWidget {
       itemBuilder: (context, index) {
         final data = todayData[index];
         bool isCompleted = ref.read(todoStateProvider.notifier).getStatus(data);
+        dynamic color = ref.read(todoStateProvider.notifier).getRandomColor();
         return TodoTile(
           title: data.title,
           description: data.desc,
-          clr: AppConst.kGreen,
+          clr: color,
           start: data.startTime,
           end: data.endTime,
-          switcher: Switch(value: isCompleted, onChanged: (value){}),
+          switcher: Switch(value: isCompleted, onChanged: (value) {}),
         );
       },
       itemCount: todayData.length,

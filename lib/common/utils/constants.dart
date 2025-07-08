@@ -15,9 +15,15 @@ class AppConst {
   static const Color kBKLight = Color(0x58797777);
   static const Color kGreyBK = Color(0xFF202C33);
 
-
-
   static double kWidth = 375.w;
   static double kHeight = 825.h;
   static double kRadius = 12.h;
 }
+
+List<dynamic> colors = [
+  Color(0xFFD80000),
+  Color(0xFF027EB5),
+  Color(0xFF20A31E),
+  Color(0xFFF9F900),
+  Color(0xFF79017B),
+];
