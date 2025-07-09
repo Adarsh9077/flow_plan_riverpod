@@ -15,7 +15,7 @@ class TomorrowList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final todos = ref.watch(todoStateProvider);
     String tomorrow = ref.read(todoStateProvider.notifier).getTomorrow();
-    var tomorrowList = todos.where(
+    var tomorrowTasks = todos.where(
       (element) => element.date!.contains(tomorrow),
     );
     var color = ref.read(todoStateProvider.notifier).getRandomColor();
@@ -32,7 +32,7 @@ class TomorrowList extends ConsumerWidget {
             : Icon(AntDesign.closecircleo, color: AppConst.kBlueLight),
       ),
       children: [
-        for (final todo in tomorrowList)
+        for (final todo in tomorrowTasks)
           TodoTile(
             title: todo.title,
             description: todo.desc,

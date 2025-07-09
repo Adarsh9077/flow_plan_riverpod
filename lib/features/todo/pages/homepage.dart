@@ -8,7 +8,9 @@ import 'package:flow_plan/common/widgets/width_spacer.dart';
 import 'package:flow_plan/features/todo/controllers/expansion_provider.dart';
 import 'package:flow_plan/features/todo/controllers/todo/todo_provider.dart';
 import 'package:flow_plan/features/todo/pages/add.dart';
+import 'package:flow_plan/features/todo/widgets/day_after_tomorrow_tasks.dart';
 import 'package:flow_plan/features/todo/widgets/todo_tile.dart';
+import 'package:flow_plan/features/todo/widgets/tomorrow_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -33,11 +35,10 @@ class _HomePageState extends ConsumerState<HomePage>
   final TextEditingController searchController = TextEditingController();
 
   @override
-  // Future<List<Map<>>> db = DBHelper.db();
   void initState() {
     // TODO: implement initState
     super.initState();
-    loadData();
+    // loadData();
   }
 
   void loadData() async {
@@ -48,7 +49,6 @@ class _HomePageState extends ConsumerState<HomePage>
       print("object\n");
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -210,38 +210,42 @@ class _HomePageState extends ConsumerState<HomePage>
                 ),
               ),
               HeightSpacer(height: 20),
-              ExpansionTileCustom(
-                title: "Tomorrow's Task",
-                subTitle: "Tomorrow's Task are shawn here",
-                onExpansionChanged: (bool expanded) {
-                  ref.read(expansionStateProvider.notifier).setStart(!expanded);
-                },
-                trailing: Padding(
-                  padding: const EdgeInsets.only(right: 12.0),
-                  child: ref.watch(expansionStateProvider)
-                      ? Icon(AntDesign.circledown, color: AppConst.kLight)
-                      : Icon(
-                          AntDesign.closecircleo,
-                          color: AppConst.kBlueLight,
-                        ),
-                ),
-                children: [
-                  TodoTile(
-                    start: "11:00",
-                    end: "04:00",
-                    switcher: Switch(
-                      value: true,
-                      onChanged: (value) {
-                        setState(() {
-                          value = !value;
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
+              // ExpansionTileCustom(
+              //   title: "Tomorrow's Task",
+              //   subTitle: "Tomorrow's Task are shawn here",
+              //   onExpansionChanged: (bool expanded) {
+              //     ref.read(expansionStateProvider.notifier).setStart(!expanded);
+              //   },
+              //   trailing: Padding(
+              //     padding: const EdgeInsets.only(right: 12.0),
+              //     child: ref.watch(expansionStateProvider)
+              //         ? Icon(AntDesign.circledown, color: AppConst.kLight)
+              //         : Icon(
+              //             AntDesign.closecircleo,
+              //             color: AppConst.kBlueLight,
+              //           ),
+              //   ),
+              //   children: [
+              //     TodoTile(
+              //       start: "11:00",
+              //       end: "04:00",
+              //       switcher: Switch(
+              //         value: true,
+              //         onChanged: (value) {
+              //           setState(() {
+              //             value = !value;
+              //           });
+              //         },
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              TomorrowList(),
+              HeightSpacer(height: 20),
+              DayAfterTomorrowTasks(),
               HeightSpacer(height: 20),
               ExpansionTileCustom(
+                // comment this widget after completing DayAfterTomorrow file
                 title: DateTime.now()
                     .add(Duration(days: 2))
                     .toString()
