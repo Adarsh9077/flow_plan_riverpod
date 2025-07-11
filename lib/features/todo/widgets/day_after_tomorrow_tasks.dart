@@ -2,6 +2,7 @@ import 'package:flow_plan/common/utils/constants.dart';
 import 'package:flow_plan/common/widgets/expansion_tile_custom.dart';
 import 'package:flow_plan/features/todo/controllers/expansion_provider.dart';
 import 'package:flow_plan/features/todo/controllers/todo/todo_provider.dart';
+import 'package:flow_plan/features/todo/widgets/todo_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -12,6 +13,7 @@ class DayAfterTomorrowTasks extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var todos = ref.watch(todoStateProvider);
+    var color = ref.read(todoStateProvider.notifier).getRandomColor();
     String dayAfterTomorrow = ref
         .read(todoStateProvider.notifier)
         .getDayAfterTomorrow();
@@ -30,7 +32,28 @@ class DayAfterTomorrowTasks extends ConsumerWidget {
             ? Icon(AntDesign.circledown, color: AppConst.kLight)
             : Icon(AntDesign.closecircleo, color: AppConst.kBlueLight),
       ),
-      children: [],
+      children: [
+        for (final todo in dayAfterTomorrowTask)
+          TodoTile(
+            title: todo.title,
+            description: todo.desc,
+            clr: color,
+            start: todo.startTime,
+            end: todo.endTime,
+            delete: () {
+              print(todo.id.runtimeType);
+              // int? lineCount;
+              // assert(lineCount == null);
+              // var idInt = int.parse("5678");
+              ref.read(todoStateProvider.notifier).deleteTodo(todo.id ?? 0);
+            },
+            editWidget: GestureDetector(
+              onTap: () {},
+              child: Icon(MaterialCommunityIcons.circle_edit_outline),
+            ),
+            switcher: SizedBox.shrink(),
+          ),
+      ],
     );
   }
 } // 07:42:00

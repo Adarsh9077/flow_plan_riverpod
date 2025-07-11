@@ -99,7 +99,7 @@ class DBHelper {
   static Future<void> deleteItem(int id) async {
     final db = await DBHelper.db();
     try {
-      db.delete("flowPlane", whereArgs: [id], where: "id = ?");
+      db.delete("flowPlans", whereArgs: [id], where: "id = ?");
     } catch (e) {
       debugPrint("Unable to delete $e");
     }
