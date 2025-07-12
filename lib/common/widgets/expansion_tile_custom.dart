@@ -29,7 +29,11 @@ class ExpansionTileCustom extends StatelessWidget {
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
-          title: BottomTitles(title: title, subTitle: subTitle,clr: AppConst.kBlueLight,),
+          title: BottomTitles(
+            title: title,
+            subTitle: subTitle,
+            clr: AppConst.kBlueLight,
+          ),
           tilePadding: EdgeInsets.zero,
           childrenPadding: EdgeInsets.zero,
           onExpansionChanged: onExpansionChanged,

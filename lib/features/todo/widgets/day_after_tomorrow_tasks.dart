@@ -41,10 +41,6 @@ class DayAfterTomorrowTasks extends ConsumerWidget {
             start: todo.startTime,
             end: todo.endTime,
             delete: () {
-              print(todo.id.runtimeType);
-              // int? lineCount;
-              // assert(lineCount == null);
-              // var idInt = int.parse("5678");
               ref.read(todoStateProvider.notifier).deleteTodo(todo.id ?? 0);
             },
             editWidget: GestureDetector(

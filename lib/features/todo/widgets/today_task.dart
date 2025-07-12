@@ -29,7 +29,26 @@ class TodayTask extends ConsumerWidget {
           clr: color,
           start: data.startTime,
           end: data.endTime,
-          switcher: Switch(value: isCompleted, onChanged: (value) {}),
+          switcher: Switch(
+            value: isCompleted,
+            onChanged: (value) {
+              isCompleted = value;
+              // print()
+              ref
+                  .read(todoStateProvider.notifier)
+                  .markAsCompleted(
+                    data.id ?? 0,
+                    data.title.toString(),
+                    data.desc.toString(),
+                    1,
+                    data.date.toString(),
+                    data.startTime.toString(),
+                    data.endTime.toString(),
+                    data.reminder ?? 0,
+                    data.repeat.toString(),
+                  );
+            },
+          ),
           delete: () {
             ref.read(todoStateProvider.notifier).deleteTodo(data.id ?? 0);
           },

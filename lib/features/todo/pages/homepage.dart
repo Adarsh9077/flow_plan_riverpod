@@ -8,6 +8,7 @@ import 'package:flow_plan/common/widgets/width_spacer.dart';
 import 'package:flow_plan/features/todo/controllers/expansion_provider.dart';
 import 'package:flow_plan/features/todo/controllers/todo/todo_provider.dart';
 import 'package:flow_plan/features/todo/pages/add.dart';
+import 'package:flow_plan/features/todo/widgets/completed_tasks.dart';
 import 'package:flow_plan/features/todo/widgets/day_after_tomorrow_tasks.dart';
 import 'package:flow_plan/features/todo/widgets/todo_tile.dart';
 import 'package:flow_plan/features/todo/widgets/tomorrow_list.dart';
@@ -202,84 +203,18 @@ class _HomePageState extends ConsumerState<HomePage>
                         child: TodayTask(),
                       ),
                       Container(
-                        color: AppConst.kGreyLight,
+                        color: AppConst.kBKLight,
                         height: AppConst.kHeight * 0.3,
+                        child: CompletedTasks(),
                       ),
                     ],
                   ),
                 ),
               ),
               HeightSpacer(height: 20),
-              // ExpansionTileCustom(
-              //   title: "Tomorrow's Task",
-              //   subTitle: "Tomorrow's Task are shawn here",
-              //   onExpansionChanged: (bool expanded) {
-              //     ref.read(expansionStateProvider.notifier).setStart(!expanded);
-              //   },
-              //   trailing: Padding(
-              //     padding: const EdgeInsets.only(right: 12.0),
-              //     child: ref.watch(expansionStateProvider)
-              //         ? Icon(AntDesign.circledown, color: AppConst.kLight)
-              //         : Icon(
-              //             AntDesign.closecircleo,
-              //             color: AppConst.kBlueLight,
-              //           ),
-              //   ),
-              //   children: [
-              //     TodoTile(
-              //       start: "11:00",
-              //       end: "04:00",
-              //       switcher: Switch(
-              //         value: true,
-              //         onChanged: (value) {
-              //           setState(() {
-              //             value = !value;
-              //           });
-              //         },
-              //       ),
-              //     ),
-              //   ],
-              // ),
               TomorrowList(),
               HeightSpacer(height: 20),
               DayAfterTomorrowTasks(),
-              HeightSpacer(height: 20),
-              ExpansionTileCustom(
-                // comment this widget after completing DayAfterTomorrow file
-                title: DateTime.now()
-                    .add(Duration(days: 2))
-                    .toString()
-                    .substring(5, 10),
-                subTitle: "Day after tomorrow tasks",
-                onExpansionChanged: (bool expanded) {
-                  ref
-                      .read(expansionState0Provider.notifier)
-                      .setStart(!expanded);
-                },
-                trailing: Padding(
-                  padding: EdgeInsets.only(right: 8),
-                  child: ref.watch(expansionState0Provider)
-                      ? Icon(AntDesign.circledown, color: AppConst.kLight)
-                      : Icon(
-                          AntDesign.closecircleo,
-                          color: AppConst.kBlueLight,
-                        ),
-                ),
-                children: [
-                  TodoTile(
-                    start: "08:00",
-                    end: "10:00",
-                    switcher: Switch(
-                      value: true,
-                      onChanged: (value) {
-                        setState(() {
-                          value = !value;
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
               HeightSpacer(height: 20),
               ExpansionTileCustom(
                 title: DateTime.now()
