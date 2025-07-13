@@ -27,3 +27,5 @@ List<dynamic> colors = [
   Color(0xFFF9F900),
   Color(0xFF79017B),
 ];
+String titles = "";
+String descs = "";

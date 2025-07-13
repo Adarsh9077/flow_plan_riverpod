@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../common/models/task_modal.dart';
+import '../../../common/utils/constants.dart';
 import '../controllers/todo/todo_provider.dart';
 
 class TodayTask extends ConsumerWidget {
@@ -53,7 +54,10 @@ class TodayTask extends ConsumerWidget {
             ref.read(todoStateProvider.notifier).deleteTodo(data.id ?? 0);
           },
           editWidget: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              titles = data.title.toString();
+              descs = data.desc.toString();
+            },
             child: Icon(MaterialCommunityIcons.circle_edit_outline),
           ),
         );

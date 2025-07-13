@@ -1,27 +1,48 @@
-import 'package:flow_plan/common/models/task_modal.dart';
 import 'package:flow_plan/common/utils/constants.dart';
 import 'package:flow_plan/common/widgets/app_style.dart';
 import 'package:flow_plan/common/widgets/custom_otl_btn.dart';
 import 'package:flow_plan/common/widgets/custom_text.dart';
 import 'package:flow_plan/common/widgets/height_spacer.dart';
-import 'package:flow_plan/features/todo/controllers/dates/dates_provider.dart';
-import 'package:flow_plan/features/todo/controllers/todo/todo_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as picker;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AddTask extends ConsumerStatefulWidget {
-  AddTask({super.key});
+import '../controllers/dates/dates_provider.dart';
+import '../controllers/todo/todo_provider.dart';
+
+class UpdateTask extends ConsumerStatefulWidget {
+  final String title;
+
+  const UpdateTask({
+    super.key,
+    required this.id,
+    required this.title,
+    required this.desc,
+    required this.date,
+    required this.startTime,
+    required this.endTime,
+  });
+
+  final int id;
+  final String desc;
+  final String date;
+  final String startTime;
+  final String endTime;
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _AddTaskState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _UpdateTaskState();
 }
 
-class _AddTaskState extends ConsumerState<AddTask> {
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController descController = TextEditingController();
+class _UpdateTaskState extends ConsumerState<UpdateTask> {
+  final TextEditingController titleController = TextEditingController(
+    text: titles,
+  );
+
+  final TextEditingController descController = TextEditingController(
+    text: descs,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +51,7 @@ class _AddTaskState extends ConsumerState<AddTask> {
     var scheduleFinishTime = ref.watch(finishTimeStateProvider);
 
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
+      appBar: AppBar(elevation: 0, backgroundColor: Colors.transparent),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: ListView(
@@ -38,23 +59,21 @@ class _AddTaskState extends ConsumerState<AddTask> {
             HeightSpacer(height: 30),
             CustomTextField(
               controller: titleController,
-              hintText: "Add Title",
+              hintText: "",
               hintStyle: appStyle(16, AppConst.kGreyLight, FontWeight.w600),
             ),
-            HeightSpacer(height: 20.w),
+            HeightSpacer(height: 30),
             CustomTextField(
               controller: descController,
-              hintText: "Add Description",
-              hintStyle: appStyle(16, AppConst.kGreyLight, FontWeight.w600),
+              hintText: "",
+              hintStyle: appStyle(14, AppConst.kGreyLight, FontWeight.w400),
             ),
             HeightSpacer(height: 20),
             CustomOutlineBtn(
               width: AppConst.kWidth,
               height: 52.h,
               color: AppConst.kLight,
-              text: scheduleDate == ""
-                  ? "Set Date"
-                  : scheduleDate.substring(0, 10),
+              text: scheduleDate == "" ? "Set Date" : scheduleDate,
               color2: AppConst.kBlueLight,
               onTap: () {
                 picker.DatePicker.showDatePicker(
@@ -85,7 +104,7 @@ class _AddTaskState extends ConsumerState<AddTask> {
                   color: AppConst.kLight,
                   text: scheduleStartTime == ""
                       ? "Start Time"
-                      : scheduleStartTime.substring(11, 16),
+                      : scheduleStartTime,
                   color2: AppConst.kBlueLight,
                   onTap: () {
                     picker.DatePicker.showDateTimePicker(
@@ -107,8 +126,8 @@ class _AddTaskState extends ConsumerState<AddTask> {
                   height: 52.h,
                   color: AppConst.kLight,
                   text: scheduleFinishTime == ""
-                      ? "End Time"
-                      : scheduleFinishTime.substring(11, 16),
+                      ? "End TIme"
+                      : scheduleFinishTime,
                   color2: AppConst.kBlueLight,
                   onTap: () {
                     picker.DatePicker.showDateTimePicker(
@@ -127,10 +146,10 @@ class _AddTaskState extends ConsumerState<AddTask> {
                 ),
               ],
             ),
-            HeightSpacer(height: 20.h),
+            HeightSpacer(height: 30),
             CustomOutlineBtn(
               width: AppConst.kWidth,
-              height: 52.w,
+              height: 52.h,
               color: AppConst.kLight,
               text: "Submit",
               color2: AppConst.kGreen,
@@ -140,17 +159,19 @@ class _AddTaskState extends ConsumerState<AddTask> {
                     scheduleDate.isNotEmpty &&
                     scheduleStartTime.isNotEmpty &&
                     scheduleFinishTime.isNotEmpty) {
-                  Task task = Task(
-                    title: titleController.text,
-                    desc: descController.text,
-                    isCompleted: 0,
-                    date: scheduleDate,
-                    startTime: scheduleStartTime.substring(10, 16),
-                    endTime: scheduleFinishTime.substring(10, 16),
-                    reminder: 0,
-                    repeat: "yes",
-                  );
-                  ref.read(todoStateProvider.notifier).addItem(task);
+                  ref
+                      .read(todoStateProvider.notifier)
+                      .updateItem(
+                        widget.id,
+                        titleController.text,
+                        descController.text,
+                        0,
+                        scheduleDate,
+                        scheduleStartTime.substring(10, 16),
+                        scheduleFinishTime.substring(10, 16),
+                        0,
+                        "yes",
+                      );
                   ref.read(dateStateProvider.notifier).setDate("");
                   ref.read(startTimeStateProvider.notifier).setStartTime("");
                   ref.read(finishTimeStateProvider.notifier).setFinishTime("");
@@ -165,4 +186,4 @@ class _AddTaskState extends ConsumerState<AddTask> {
       ),
     );
   }
-} // 07:00:00
+}
