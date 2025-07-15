@@ -2,6 +2,7 @@ import 'package:flow_plan/common/utils/constants.dart';
 import 'package:flow_plan/common/widgets/expansion_tile_custom.dart';
 import 'package:flow_plan/features/todo/controllers/expansion_provider.dart';
 import 'package:flow_plan/features/todo/controllers/todo/todo_provider.dart';
+import 'package:flow_plan/features/todo/pages/update_tasks.dart';
 import 'package:flow_plan/features/todo/widgets/todo_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -44,7 +45,16 @@ class DayAfterTomorrowTasks extends ConsumerWidget {
               ref.read(todoStateProvider.notifier).deleteTodo(todo.id ?? 0);
             },
             editWidget: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                titles = todo.title.toString();
+                descs = todo.desc.toString();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UpdateTask(id: todo.id ?? 0),
+                  ),
+                );
+              },
               child: Icon(MaterialCommunityIcons.circle_edit_outline),
             ),
             switcher: SizedBox.shrink(),

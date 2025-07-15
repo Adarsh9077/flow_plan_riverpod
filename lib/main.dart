@@ -1,13 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flow_plan/common/utils/constants.dart';
-import 'package:flow_plan/features/todo/pages/update_tasks.dart';
+import 'package:flow_plan/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'features/todo/pages/homepage.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(ProviderScope(child: MyApp()));
+  // sha1_key 07:5D:DC:C4:73:74:82:A9:A5:D5:6A:94:DE:F1:19:92:7B:1A:54:12
 }
 
 class MyApp extends StatelessWidget {

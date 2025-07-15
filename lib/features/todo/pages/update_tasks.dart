@@ -13,23 +13,14 @@ import '../controllers/dates/dates_provider.dart';
 import '../controllers/todo/todo_provider.dart';
 
 class UpdateTask extends ConsumerStatefulWidget {
-  final String title;
+
 
   const UpdateTask({
     super.key,
     required this.id,
-    required this.title,
-    required this.desc,
-    required this.date,
-    required this.startTime,
-    required this.endTime,
   });
 
   final int id;
-  final String desc;
-  final String date;
-  final String startTime;
-  final String endTime;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _UpdateTaskState();
@@ -73,7 +64,7 @@ class _UpdateTaskState extends ConsumerState<UpdateTask> {
               width: AppConst.kWidth,
               height: 52.h,
               color: AppConst.kLight,
-              text: scheduleDate == "" ? "Set Date" : scheduleDate,
+              text: scheduleDate == "" ? "Set Date" : scheduleDate.substring(0,10),
               color2: AppConst.kBlueLight,
               onTap: () {
                 picker.DatePicker.showDatePicker(
@@ -104,7 +95,7 @@ class _UpdateTaskState extends ConsumerState<UpdateTask> {
                   color: AppConst.kLight,
                   text: scheduleStartTime == ""
                       ? "Start Time"
-                      : scheduleStartTime,
+                      : scheduleStartTime.substring(11,16),
                   color2: AppConst.kBlueLight,
                   onTap: () {
                     picker.DatePicker.showDateTimePicker(
@@ -127,7 +118,7 @@ class _UpdateTaskState extends ConsumerState<UpdateTask> {
                   color: AppConst.kLight,
                   text: scheduleFinishTime == ""
                       ? "End TIme"
-                      : scheduleFinishTime,
+                      : scheduleFinishTime.substring(11,16),
                   color2: AppConst.kBlueLight,
                   onTap: () {
                     picker.DatePicker.showDateTimePicker(
@@ -186,4 +177,4 @@ class _UpdateTaskState extends ConsumerState<UpdateTask> {
       ),
     );
   }
-}
+} //08:18:00

@@ -1,3 +1,4 @@
+import 'package:flow_plan/features/todo/pages/update_tasks.dart';
 import 'package:flow_plan/features/todo/widgets/todo_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -57,6 +58,12 @@ class TodayTask extends ConsumerWidget {
             onTap: () {
               titles = data.title.toString();
               descs = data.desc.toString();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => UpdateTask(id: data.id ?? 0),
+                ),
+              );
             },
             child: Icon(MaterialCommunityIcons.circle_edit_outline),
           ),

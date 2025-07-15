@@ -52,11 +52,6 @@ class TomorrowList extends ConsumerWidget {
                   MaterialPageRoute(
                     builder: (context) => UpdateTask(
                       id: todo.id ?? 0,
-                      title: titles,
-                      desc: descs,
-                      date: todo.date.toString(),
-                      startTime: todo.startTime.toString(),
-                      endTime: todo.endTime.toString(),
                     ),
                   ),
                 );
