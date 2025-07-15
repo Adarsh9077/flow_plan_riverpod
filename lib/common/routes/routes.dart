@@ -1,3 +1,4 @@
+import 'package:flow_plan/features/auth/pages/loginPage.dart';
 import 'package:flow_plan/features/onboarding/pages/onboarding.dart';
 import 'package:flutter/material.dart';
 
@@ -7,10 +8,15 @@ class Routes {
   static const String otp = 'otp';
   static const String home = 'home';
 
-  static Route<dynamic> onGenrateRoute(RouteSettings setting) {
-    switch (setting.name) {
+  static Route<dynamic> onGenrateRoute(RouteSettings settings) {
+    switch (settings.name) {
       case onBoarding:
+        return MaterialPageRoute(builder: (context) => Onboarding());
+      case login:
+        return MaterialPageRoute(builder: (context) => LoginPage());
+      case otp:
+        final Map args  = settings.arguments as Map;
         return MaterialPageRoute(builder: (context) => Onboarding());
     }
   }
-} // 08:48:15
+} // 08:49:35
