@@ -94,10 +94,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               HeightSpacer(height: 20),
               CustomOutlineBtn(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => OtpPage()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => OtpPage()),
+                  // );
                 },
                 width: AppConst.kWidth * 0.9,
                 height: AppConst.kHeight * 0.07,

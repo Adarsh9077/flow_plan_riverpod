@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flow_plan/common/utils/constants.dart';
+import 'package:flow_plan/features/onboarding/pages/onboarding.dart';
 import 'package:flow_plan/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,8 +47,8 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
               ),
               themeMode: ThemeMode.dark,
-              // home: UpdateTask(title: "Sita", desc: "Ram"),
-              home: HomePage(),
+              home: Onboarding(),
+              // home: HomePage(),
             );
           },
         );

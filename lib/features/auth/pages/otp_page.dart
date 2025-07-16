@@ -8,7 +8,11 @@ import 'package:pinput/pinput.dart';
 import '../../../common/utils/constants.dart';
 
 class OtpPage extends StatelessWidget {
-  const OtpPage({super.key});
+  const OtpPage({super.key, required this.phone, required this.smsCodeId});
+
+  final String smsCodeId;
+
+  final String phone;
 
   @override
   Widget build(BuildContext context) {
