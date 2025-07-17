@@ -67,5 +67,3 @@ class CustomTextField extends StatelessWidget {
     );
   }
 }
-
-// 2:00:00
