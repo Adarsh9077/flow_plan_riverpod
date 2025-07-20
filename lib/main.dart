@@ -1,5 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flow_plan/common/models/user_modal.dart';
+import 'package:flow_plan/common/routes/routes.dart';
 import 'package:flow_plan/common/utils/constants.dart';
+import 'package:flow_plan/features/auth/controllers/user_controller.dart';
 import 'package:flow_plan/features/onboarding/pages/onboarding.dart';
 import 'package:flow_plan/firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +18,7 @@ void main() async {
   // sha1_key 07:5D:DC:C4:73:74:82:A9:A5:D5:6A:94:DE:F1:19:92:7B:1A:54:12
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   static final defaultLightColorScheme = ColorScheme.fromSwatch(
@@ -27,7 +30,9 @@ class MyApp extends StatelessWidget {
   );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(userProvider.notifier).refresh();
+    List<UserModal> users = ref.watch(userProvider);
     return ScreenUtilInit(
       useInheritedMediaQuery: true,
       designSize: Size(375, 825),
@@ -47,7 +52,8 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
               ),
               themeMode: ThemeMode.dark,
-              home: Onboarding(),
+              home: users.isEmpty ? const Onboarding() : const HomePage(),
+              onGenerateRoute: Routes.onGenerateRoute,
               // home: HomePage(),
             );
           },

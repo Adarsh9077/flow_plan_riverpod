@@ -4,6 +4,9 @@ import 'package:flow_plan/common/widgets/app_style.dart';
 import 'package:flow_plan/common/widgets/custom_otl_btn.dart';
 import 'package:flow_plan/common/widgets/height_spacer.dart';
 import 'package:flow_plan/common/widgets/reusable_text.dart';
+import 'package:flow_plan/common/widgets/show_dialogue.dart';
+import 'package:flow_plan/features/auth/controllers/auth_controller.dart';
+import 'package:flow_plan/features/auth/controllers/code_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -19,6 +22,28 @@ class LoginPage extends ConsumerStatefulWidget {
 
 class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController phoneController = TextEditingController();
+
+  sendCodeToUser() {
+    if (phoneController.text.isEmpty) {
+      return showAlertDialog(
+        context: context,
+        message: "Please Enter Your Phone Number",
+      );
+    } else if (phoneController.text.length < 8) {
+      return showAlertDialog(
+        context: context,
+        message: "Your Number is too Short",
+      );
+    } else {
+      ref
+          .read(authControllerProvider)
+          .sendsSms(
+            context: context,
+            phone: "${ref.read(codeState01Provider)}${phoneController.text}",
+          );
+    }
+  }
+
   Country country = Country(
     phoneCode: "91",
     countryCode: "IND",
