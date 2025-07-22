@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 // import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
-final authRepositoryProvider = Provider((ref){return AuthRepository(auth: FirebaseAuth.instance);});
+final authRepositoryProvider = Provider((ref) {
+  return AuthRepository(auth: FirebaseAuth.instance);
+});
 
 class AuthRepository {
   final FirebaseAuth auth;
