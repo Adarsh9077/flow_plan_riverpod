@@ -91,5 +91,3 @@ class _OnboardingState extends State<Onboarding> {
     );
   }
 }
-
-// 1:09:00

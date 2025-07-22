@@ -39,21 +39,21 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           .read(authControllerProvider)
           .sendsSms(
             context: context,
-            phone: "${ref.read(codeState01Provider)}${phoneController.text}",
+            phone: "+${ref.read(codeState01Provider)}${phoneController.text}",
           );
     }
   }
 
   Country country = Country(
     phoneCode: "91",
-    countryCode: "IND",
+    countryCode: "IN",
     e164Sc: 0,
     geographic: true,
     level: 1,
     name: "INDIA",
     example: "INDIA",
     displayName: "India",
-    displayNameNoCountryCode: "IND",
+    displayNameNoCountryCode: "IN",
     e164Key: "",
   );
 
@@ -103,11 +103,17 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         ),
                         onSelect: (code) {
                           setState(() {});
+                          country = code;
+                          ref
+                              .read(codeState01Provider.notifier)
+                              .setStart(code.phoneCode);
+                          print(ref.read(codeState01Provider));
+                          print("object00000000000");
                         },
                       );
                     },
                     child: ReusableText(
-                      text: "${country.flagEmoji} ${country.countryCode}",
+                      text: "${country.flagEmoji} + ${country.phoneCode}",
                       style: appStyle(18, AppConst.kBKDark, FontWeight.bold),
                     ),
                   ),
@@ -123,6 +129,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   //   context,
                   //   MaterialPageRoute(builder: (context) => OtpPage()),
                   // );
+                  sendCodeToUser();
                 },
                 width: AppConst.kWidth * 0.9,
                 height: AppConst.kHeight * 0.07,
@@ -136,4 +143,4 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       ),
     );
   }
-}
+} // 10:04:20
