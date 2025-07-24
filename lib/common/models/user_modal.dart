@@ -1,9 +1,3 @@
-// import 'dart:convert';
-//
-// UserModal userModalFromJson(String str) => UserModal.fromJson(json);
-//
-// String userModalToJson(UserModal data) => json.encode(data.toJson());
-
 class UserModal {
   final int id;
   final int isVerified;

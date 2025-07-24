@@ -1,11 +1,12 @@
+import 'package:flow_plan/common/utils/constants.dart';
 import 'package:flow_plan/common/widgets/app_style.dart';
 import 'package:flow_plan/common/widgets/height_spacer.dart';
 import 'package:flow_plan/common/widgets/reusable_text.dart';
+import 'package:flow_plan/features/auth/controllers/auth_controller.dart';
 import 'package:flow_plan/features/todo/pages/homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pinput/pinput.dart';
-
-import '../../../common/utils/constants.dart';
 
 class OtpPage extends StatelessWidget {
   const OtpPage({super.key, required this.phone, required this.smsCodeId});
@@ -13,6 +14,17 @@ class OtpPage extends StatelessWidget {
   final String smsCodeId;
 
   final String phone;
+
+  void verifyOtpCode(BuildContext context, WidgetRef ref, String smsCode) {
+    ref
+        .read(authControllerProvider)
+        .verifyOtpCode(
+          context: context,
+          smsCodeId: smsCodeId,
+          smsCode: smsCode,
+          mounted: true,
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +74,4 @@ class OtpPage extends StatelessWidget {
       ),
     );
   }
-}
-
-//2:34:00
+} // 10:11:30

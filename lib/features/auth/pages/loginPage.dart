@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../common/widgets/custom_text.dart';
-import 'otp_page.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -108,7 +107,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               .read(codeState01Provider.notifier)
                               .setStart(code.phoneCode);
                           print(ref.read(codeState01Provider));
-                          print("object00000000000");
                         },
                       );
                     },
@@ -143,4 +141,4 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       ),
     );
   }
-} // 10:04:20
+}
