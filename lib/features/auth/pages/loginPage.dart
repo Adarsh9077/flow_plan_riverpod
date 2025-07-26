@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../common/widgets/custom_text.dart';
+import 'otp_page.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -123,10 +124,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               HeightSpacer(height: 20),
               CustomOutlineBtn(
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => OtpPage()),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          OtpPage(phone: country.phoneCode, smsCodeId: ""),
+                    ),
+                  );
                   sendCodeToUser();
                 },
                 width: AppConst.kWidth * 0.9,

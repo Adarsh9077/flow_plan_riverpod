@@ -8,11 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pinput/pinput.dart';
 
-class OtpPage extends StatelessWidget {
+class OtpPage extends ConsumerWidget {
   const OtpPage({super.key, required this.phone, required this.smsCodeId});
 
   final String smsCodeId;
-
   final String phone;
 
   void verifyOtpCode(BuildContext context, WidgetRef ref, String smsCode) {
@@ -27,7 +26,7 @@ class OtpPage extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -58,14 +57,22 @@ class OtpPage extends StatelessWidget {
                 onChanged: (value) {
                   if (value.length == 6) {
                     print("Picka Chu...");
+
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => HomePage()),
                     );
+                    return verifyOtpCode(context, ref, value);
                   }
                 },
                 onSubmitted: (value) {
-                  if (value.length == 6) {}
+                  if (value.length == 6) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    );
+                    return verifyOtpCode(context, ref, value);
+                  }
                 },
               ),
             ],
