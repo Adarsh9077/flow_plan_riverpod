@@ -44,7 +44,7 @@ class _HomePageState extends ConsumerState<HomePage>
 
   void loadData() async {
     final items = await DBHelper.getItems();
-    print("FlowPlans@@@@@@@@@@");
+    // print("FlowPlans@@@@@@@@@@");
     items.forEach((item) {
       print(item);
       print("object\n");
