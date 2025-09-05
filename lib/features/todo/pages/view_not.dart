@@ -1,5 +1,7 @@
 import 'package:flow_plan/common/widgets/app_style.dart';
+import 'package:flow_plan/common/widgets/height_spacer.dart';
 import 'package:flow_plan/common/widgets/reusable_text.dart';
+import 'package:flow_plan/common/widgets/width_spacer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -35,6 +37,37 @@ class NotificationsPage extends StatelessWidget {
                       text: "Reminder",
                       style: appStyle(40, AppConst.kLight, FontWeight.bold),
                     ),
+                    HeightSpacer(height: 5),
+                    Container(
+                      width: AppConst.kWidth,
+                      padding: EdgeInsets.only(left: 5),
+                      decoration: BoxDecoration(
+                        color: AppConst.kYellow,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          ReusableText(
+                            text: "Today",
+                            style: appStyle(
+                              14,
+                              AppConst.kBKLight,
+                              FontWeight.bold,
+                            ),
+                          ),
+                          WidthSpacer(width: 15),
+                          ReusableText(
+                            text: "From : start To: end",
+                            style: appStyle(
+                              15,
+                              AppConst.kBKDark,
+                              FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -44,4 +77,4 @@ class NotificationsPage extends StatelessWidget {
       ),
     );
   }
-}
+} // 10:28:00
