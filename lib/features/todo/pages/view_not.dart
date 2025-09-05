@@ -52,7 +52,7 @@ class NotificationsPage extends StatelessWidget {
                             text: "Today",
                             style: appStyle(
                               14,
-                              AppConst.kBKLight,
+                              AppConst.kBKDark,
                               FontWeight.bold,
                             ),
                           ),
@@ -68,6 +68,12 @@ class NotificationsPage extends StatelessWidget {
                         ],
                       ),
                     ),
+                    HeightSpacer(height: 10),
+                    ReusableText(
+                      text: "Title",
+                      style: appStyle(30, AppConst.kBKDark, FontWeight.bold),
+                    ),
+                    HeightSpacer(height: 10),
                   ],
                 ),
               ),
@@ -77,4 +83,4 @@ class NotificationsPage extends StatelessWidget {
       ),
     );
   }
-} // 10:28:00
+} // 10:31:00
