@@ -74,8 +74,32 @@ class NotificationsPage extends StatelessWidget {
                       style: appStyle(30, AppConst.kBKDark, FontWeight.bold),
                     ),
                     HeightSpacer(height: 10),
+                    Text(
+                      "Sub Title Dummy Words.........",
+                      maxLines: 8,
+                      style: appStyle(16, AppConst.kBKDark, FontWeight.bold),
+                    ),
                   ],
                 ),
+              ),
+            ),
+            Positioned(
+              right: 12,
+              top: -10,
+              child: Image.asset(
+                "assets/images/bell.png",
+                width: 70,
+                height: 70,
+              ),
+            ),
+            Positioned(
+              bottom: -AppConst.kHeight*0.143,
+              left: 0,
+              right: 0,
+              child: Image.asset(
+                "assets/images/notification.png",
+                width: AppConst.kWidth * 0.8,
+                height: AppConst.kHeight * 0.6,
               ),
             ),
           ],
@@ -83,4 +107,4 @@ class NotificationsPage extends StatelessWidget {
       ),
     );
   }
-} // 10:31:00
+} // 10:38:45
