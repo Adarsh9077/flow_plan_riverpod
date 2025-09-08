@@ -1,4 +1,5 @@
 import 'package:flow_plan/common/helpers/db_helper.dart';
+import 'package:flow_plan/common/helpers/notifications_helper.dart';
 import 'package:flow_plan/common/widgets/app_style.dart';
 import 'package:flow_plan/common/widgets/custom_text.dart';
 import 'package:flow_plan/common/widgets/expansion_tile_custom.dart';
@@ -16,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 // import '../../../common/models/task_modal.dart';
 import '../../../common/utils/constants.dart';
 import '../widgets/today_task.dart';
@@ -33,10 +35,16 @@ class _HomePageState extends ConsumerState<HomePage>
     length: 2,
     vsync: this,
   );
+  late NotificationsHelper notificationsHelper;
+  late NotificationsHelper controller;
   final TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
+    notificationsHelper = NotificationsHelper(ref: ref);
+    Future.delayed(Duration(seconds: 0),(){
+      controller = NotificationsHelper(ref: ref);
+    });
     // TODO: implement initState
     super.initState();
     // loadData();
