@@ -1,3 +1,4 @@
+import 'package:flow_plan/common/models/task_modal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -69,10 +70,32 @@ class NotificationsHelper {
       builder: (context) => CupertinoAlertDialog(
         title: Text(title ?? ""),
         content: Text(body ?? ""),
-        actions: [CupertinoDialogAction(
-          isDestructiveAction: true,
-            child: Text("Close"))],
+        actions: [
+          CupertinoDialogAction(
+            isDestructiveAction: true,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text("Close"),
+          ),
+          CupertinoDialogAction(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text("View"),
+          ),
+        ],
       ),
     );
   }
-} // 11:05:00
+
+  scheduleNotifications(
+    int days,
+    int hours,
+    int minutes,
+    int second,
+    Task task,
+  ) async {
+    await flutterLocalNotificationsPlugin.zonedSchedule(id, title, body, scheduledDate, notificationDetails, androidScheduleMode: androidScheduleMode)
+  }
+} // 11:10:00
