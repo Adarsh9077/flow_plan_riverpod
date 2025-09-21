@@ -1,5 +1,7 @@
 import 'package:flow_plan/common/models/task_modal.dart';
+import 'package:flow_plan/features/todo/pages/view_not.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/rxdart.dart';
@@ -93,9 +95,62 @@ class NotificationsHelper {
     int days,
     int hours,
     int minutes,
-    int second,
+    int seconds,
     Task task,
   ) async {
-    await flutterLocalNotificationsPlugin.zonedSchedule(id, title, body, scheduledDate, notificationDetails, androidScheduleMode: androidScheduleMode)
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      task.id ?? 0,
+      task.title,
+      task.desc,
+      tz.TZDateTime.now(tz.local).add(
+        Duration(days: days, hours: hours, minutes: minutes, seconds: seconds),
+      ),
+      NotificationDetails(
+        android: AndroidNotificationDetails(
+          "Your channel id",
+          "Your channel name",
+        ),
+      ),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+      matchDateTimeComponents: DataTimeComponents.time,
+      payload:
+          "${task.title} | ${task.desc} | ${task.date} | ${task.startTime} | ${task.endTime}",
+    );
   }
-} // 11:10:00
+
+  void _configureSelectNotificationSubject() {
+    selectNotificationSubject.stream.listen((String? payload) async {
+      var title = payload!.split("|")[0];
+      var body = payload.split("|")[1];
+      showDialog(
+        context: ref.context,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+          title: Text(title),
+          content: Text(body, textAlign: TextAlign.justify, maxLines: 4),
+          actions: [
+            CupertinoDialogAction(
+              isDestructiveAction: true,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("Close"),
+            ),
+            CupertinoDialogAction(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NotificationsPage(payLoad: payload),
+                  ),
+                );
+              },
+              child: Text("View"),
+            ),
+          ],
+        ),
+      );
+    });
+  }
+} // 11:18:00
