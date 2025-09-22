@@ -27,7 +27,7 @@ class NotificationsHelper {
           requestAlertPermission: false,
           requestSoundPermission: false,
           requestBadgePermission: false,
-          onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+          // onDidReceiveLocalNotification: onDidReceiveLocalNotification,
         );
     final AndroidInitializationSettings androidInitializationSettings =
         const AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -112,9 +112,7 @@ class NotificationsHelper {
         ),
       ),
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-      matchDateTimeComponents: DataTimeComponents.time,
+      matchDateTimeComponents: DateTimeComponents.time,
       payload:
           "${task.title} | ${task.desc} | ${task.date} | ${task.startTime} | ${task.endTime}",
     );
