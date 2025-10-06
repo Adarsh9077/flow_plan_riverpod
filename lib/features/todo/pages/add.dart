@@ -1,11 +1,14 @@
+import 'package:flow_plan/common/helpers/notifications_helper.dart';
 import 'package:flow_plan/common/models/task_modal.dart';
 import 'package:flow_plan/common/utils/constants.dart';
 import 'package:flow_plan/common/widgets/app_style.dart';
 import 'package:flow_plan/common/widgets/custom_otl_btn.dart';
 import 'package:flow_plan/common/widgets/custom_text.dart';
 import 'package:flow_plan/common/widgets/height_spacer.dart';
+import 'package:flow_plan/common/widgets/show_dialogue.dart';
 import 'package:flow_plan/features/todo/controllers/dates/dates_provider.dart';
 import 'package:flow_plan/features/todo/controllers/todo/todo_provider.dart';
+import 'package:flow_plan/features/todo/pages/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -22,6 +25,10 @@ class AddTask extends ConsumerStatefulWidget {
 class _AddTaskState extends ConsumerState<AddTask> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descController = TextEditingController();
+  List<int> notifications = [];
+  late NotificationsHelper notifierHelper;
+  late NotificationsHelper controller;
+  final TextEditingController search = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -92,10 +99,12 @@ class _AddTaskState extends ConsumerState<AddTask> {
                       context,
                       showTitleActions: true,
                       onConfirm: (date) {
-                        // print('confirm $date');
                         ref
                             .read(startTimeStateProvider.notifier)
                             .setStartTime(date.toString());
+                        notifications = ref
+                            .read(startTimeStateProvider.notifier)
+                            .dates(date);
                       },
                       currentTime: DateTime.now(),
                       locale: picker.LocaleType.en,
@@ -150,13 +159,26 @@ class _AddTaskState extends ConsumerState<AddTask> {
                     reminder: 0,
                     repeat: "yes",
                   );
+                  notifierHelper.scheduleNotifications(
+                    notifications[0],
+                    notifications[1],
+                    notifications[2],
+                    notifications[3],
+                    task,
+                  );
                   ref.read(todoStateProvider.notifier).addItem(task);
-                  ref.read(dateStateProvider.notifier).setDate("");
+                  // ref.read(dateStateProvider.notifier).setDate("");
                   ref.read(startTimeStateProvider.notifier).setStartTime("");
                   ref.read(finishTimeStateProvider.notifier).setFinishTime("");
-                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                  );
                 } else {
-                  print("Failed to add Task12");
+                  showAlertDialog(
+                    context: context,
+                    message: "Failed to add Task",
+                  );
                 }
               },
             ),
@@ -165,4 +187,4 @@ class _AddTaskState extends ConsumerState<AddTask> {
       ),
     );
   }
-}
+} // 11:39:00

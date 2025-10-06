@@ -4,7 +4,6 @@ import 'package:flow_plan/common/routes/routes.dart';
 import 'package:flow_plan/common/utils/constants.dart';
 import 'package:flow_plan/features/auth/controllers/user_controller.dart';
 import 'package:flow_plan/features/onboarding/pages/onboarding.dart';
-import 'package:flow_plan/features/todo/pages/view_not.dart';
 import 'package:flow_plan/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,8 +52,7 @@ class MyApp extends ConsumerWidget {
                 useMaterial3: true,
               ),
               themeMode: ThemeMode.dark,
-              // home: users.isEmpty ? const Onboarding() : const HomePage(),
-              home: const NotificationsPage(),
+              home: users.isEmpty ? const Onboarding() : const HomePage(),
               onGenerateRoute: Routes.onGenerateRoute,
               // home: HomePage(),
             );
